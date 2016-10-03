@@ -12,13 +12,13 @@ mongo.connect(url, function(err,db){
     var parrots = db.collection('parrots');
     var arg = parseInt(process.argv[2]);
     var result = parrots.find({
-        age:{
-            $gt:arg
+        age: {
+            $gt: arg
         }
     });
 
     result.toArray(function(err,docs){
-        if(err) console.log(err);
+        if (err) console.log(err);
         console.log(docs);
         db.close();
     });
