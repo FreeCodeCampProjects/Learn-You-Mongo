@@ -1,28 +1,23 @@
 /*
-    Here we will learn how to count the number of documents that
-    meet certain criteria.
-    
-    Use the parrots collection from the database named learnyoumongo to
-    count all documents where age is greater than the first argument
-    passed to your script.
+    "This lesson involves removing a document with the given _id.
+    The database name will be accessible via process.argv[2].
+    The collection name will be passed as the second argument to your script.
+    The _id will be passed as the third argument to your script."
 */
 
-var mongo = require('mongodb').MongoClient
-var age = process.argv[2]
-var url = 'mongodb://localhost:27017/learnyoumongo';
+var mongo = require("mongodb").MongoClient;
+var url = 'mongodb://localhost:27017/' + process.argv[2];
 
-mongo.connect(url, function(err, db) {
-  if (err) throw err
-  var parrots = db.collection('parrots')
-  parrots.count({
-    age: {
-      $gt: +age
-    }
-  }, function(err, count) {
-    if (err) throw err
-    console.log(count)
-    db.close()
-  });
+mongo.connect(url, function(err, db){
+    if (err) throw err;
+    var collection = db.collection(process.argv[3]);
+
+    collection.remove({
+        _id: process.argv[4]
+    }, function(err) {
+        if (err) throw err
+        db.close()
+    });
 });
 
 /*
