@@ -22,8 +22,8 @@ mongo.connect(url, function(err,db){
         _id: 0
     });
 
-    result.toArray(function(err,docs){
-        if(err) console.log(err);
+    result.toArray(function(err, docs){
+        if (err) console.log(err);
         console.log(docs);
         db.close();
     });
