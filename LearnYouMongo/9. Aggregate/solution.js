@@ -31,7 +31,7 @@ mongo.connect(url, function(err, db) {
     prices.aggregate([
         { 
             $match: { size: size }
-        } ,{ 
+        }, { 
             $group: {
                 _id: 'average',
                 average: { $avg: '$price' }
